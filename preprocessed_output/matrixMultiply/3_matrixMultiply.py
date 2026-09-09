@@ -1,0 +1,16 @@
+def VAR1(VAR2, VAR3, VAR4=0, VAR5=0, VAR6=0, VAR7=None):
+if VAR7 is None:
+VAR7 = [[0] * len(VAR3[0]) for VAR8 in VAR2]
+if VAR4 == len(VAR2):
+return VAR7
+if VAR5 == len(VAR3[0]):
+return VAR1(VAR2, VAR3, VAR4 + 1, 0, 0, VAR7)
+if VAR6 == len(VAR3):
+return VAR1(VAR2, VAR3, VAR4, VAR5 + 1, 0, VAR7)
+VAR7[VAR4][VAR5] += VAR2[VAR4][VAR6] * VAR3[VAR6][VAR5]
+return VAR1(VAR2, VAR3, VAR4, VAR5, VAR6 + 1, VAR7)
+VAR2 = [[1, 2], [3, 4]]
+VAR3 = [[5, 6], [7, 8]]
+VAR7 = VAR1(VAR2, VAR3)
+for VAR9 in VAR7:
+print(VAR9)

@@ -1,0 +1,1 @@
+def VAR1 ( VAR2 ) : VAR3 = len ( VAR2 ) for VAR4 in range ( VAR3 ) : VAR5 = VAR4 for VAR6 in range ( VAR4 + 1 , VAR3 ) : if VAR2 [ VAR6 ] < VAR2 [ VAR5 ] : VAR5 = VAR6 VAR2 [ VAR4 ] , VAR2 [ VAR5 ] = ( VAR2 [ VAR5 ] , VAR2 [ VAR4 ] ) return VAR2 VAR7 = [ 64 , 34 , 25 , 12 , 22 , 11 , 90 ] print ( VAR1 ( VAR7 ) )

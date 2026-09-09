@@ -1,0 +1,9 @@
+def VAR1(VAR2):
+VAR3 = None
+VAR4 = VAR2
+while VAR4 is not None:
+VAR5 = VAR4.next
+VAR4.next = VAR3
+VAR3 = VAR4
+VAR4 = VAR5
+return VAR3

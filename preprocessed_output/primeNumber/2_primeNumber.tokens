@@ -1,0 +1,1 @@
+import math def VAR1 ( VAR2 ) : if VAR2 < 2 : return False VAR3 = int ( VAR4 . sqrt ( VAR2 ) ) + 1 for VAR5 in range ( 2 , VAR3 ) : if VAR2 % VAR5 == 0 : return False return True VAR6 = 29 print ( 'Prime' if VAR1 ( VAR6 ) else 'Not Prime' )
