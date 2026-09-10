@@ -12,6 +12,9 @@ directory remapping is needed, just a suffix swap.
 import csv
 from pathlib import Path
 
+DATASET_ROOT = Path("dataset")
+PREPROCESSED_ROOT = Path("preprocessed_output")
+
 
 def read_pairs(csv_path):
     """Reads pairs.csv and returns a list of dicts:
@@ -26,10 +29,12 @@ def read_pairs(csv_path):
 
 
 def dataset_path_to_tokens_path(dataset_path: str) -> Path:
-    """Converts a stored .py path (as written in pairs.csv) into its
-    sibling .tokens path. Also normalizes backslashes in case
-    pairs.csv was generated on Windows."""
-    return Path(dataset_path.replace("\\", "/")).with_suffix(".tokens")
+    """Converts a dataset/... .py path (as stored in pairs.csv) into the
+    matching preprocessed_output/... .tokens path."""
+    normalized = dataset_path.replace("\\", "/")
+    rel = Path(normalized).relative_to(DATASET_ROOT)
+    tokens_rel = rel.with_suffix(".tokens")
+    return PREPROCESSED_ROOT / tokens_rel
 
 
 def load_tokens(tokens_path: Path) -> list[str]:
