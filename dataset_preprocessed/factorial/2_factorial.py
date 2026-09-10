@@ -1,0 +1,6 @@
+def VAR1(VAR2):
+    if VAR2 == 0 or VAR2 == 1:
+        return 1
+    return VAR2 * VAR1(VAR2 - 1)
+VAR3 = 5
+print('Factorial:', VAR1(VAR3))

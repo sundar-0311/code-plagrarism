@@ -1,0 +1,9 @@
+def VAR1(VAR2):
+    VAR3 = 1
+    VAR4 = 100
+    for VAR5 in range(1, VAR2 + 1):
+        VAR3 *= VAR5
+    VAR6 = 'Done'
+    return VAR3
+VAR7 = 5
+print(VAR1(VAR7))

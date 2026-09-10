@@ -2,10 +2,12 @@
 Normalizes Python source files for plagiarism comparison:
   1. Strips comments and docstrings
   2. Normalizes whitespace
-  3. Renames identifiers (variables, function names, args) to VAR1, VAR2...
-     in first-seen order, so renamed-variable variants collapse to the
-     same canonical form. Keywords, builtins, and imported/dotted names
-     are left untouched so the code stays parseable-in-spirit.
+  3. Renames identifiers (variables, function names, args, class names,
+     exception names, global/nonlocal names, match-capture names) to
+     VAR1, VAR2... in first-seen order, so renamed-variable variants
+     collapse to the same canonical form. Keywords, builtins, and
+     imported/dotted names are left untouched so the code stays
+     parseable-in-spirit.
 
 Usage:
     python preprocess.py <input_dir> <output_dir>
@@ -30,9 +32,21 @@ KEYWORDS = set(keyword.kwlist)
 
 
 class IdentifierCanonicalizer(ast.NodeTransformer):
-    """Renames user-defined names (functions, variables, args) to VAR1, VAR2...
-    in first-seen order. Skips builtins, keywords, dunder names, and
-    attribute/module references (e.g. `math.sqrt` keeps `math`)."""
+    """Renames user-defined names to VAR1, VAR2... in first-seen order.
+    Skips builtins, keywords, dunder names, and attribute/module
+    references (e.g. `math.sqrt` keeps `math`).
+
+    Covers:
+      - Name nodes (variables, reads/writes, walrus targets, comprehension
+        targets, f-string expressions -- anything reached via generic_visit)
+      - FunctionDef / AsyncFunctionDef names
+      - function args (positional, *args, **kwargs, kw-only)
+      - ClassDef names
+      - except ... as <name>  (stored as a plain string, not a Name node)
+      - global / nonlocal declarations (stored as plain strings)
+      - match-statement capture names: `case x:`, `case *rest:`,
+        `case {**rest}` (stored as plain strings)
+    """
 
     def __init__(self):
         self.mapping = {}
@@ -50,13 +64,57 @@ class IdentifierCanonicalizer(ast.NodeTransformer):
         node.id = self._canonical(node.id)
         return node
 
+    def _visit_function(self, node):
+        node.name = self._canonical(node.name)
+        self.generic_visit(node)
+        return node
+
     def visit_FunctionDef(self, node):
+        return self._visit_function(node)
+
+    def visit_AsyncFunctionDef(self, node):
+        return self._visit_function(node)
+
+    def visit_ClassDef(self, node):
         node.name = self._canonical(node.name)
         self.generic_visit(node)
         return node
 
     def visit_arg(self, node):
         node.arg = self._canonical(node.arg)
+        return node
+
+    def visit_ExceptHandler(self, node):
+        if node.name:
+            node.name = self._canonical(node.name)
+        self.generic_visit(node)
+        return node
+
+    def visit_Global(self, node):
+        node.names = [self._canonical(n) for n in node.names]
+        return node
+
+    def visit_Nonlocal(self, node):
+        node.names = [self._canonical(n) for n in node.names]
+        return node
+
+    # match-statement capture patterns (Python 3.10+). Defining these is
+    # harmless on older Python -- the node types simply never occur.
+    def visit_MatchAs(self, node):
+        if node.name:
+            node.name = self._canonical(node.name)
+        self.generic_visit(node)
+        return node
+
+    def visit_MatchStar(self, node):
+        if node.name:
+            node.name = self._canonical(node.name)
+        return node
+
+    def visit_MatchMapping(self, node):
+        if node.rest:
+            node.rest = self._canonical(node.rest)
+        self.generic_visit(node)
         return node
 
 
@@ -108,7 +166,10 @@ def canonicalize_identifiers(source: str) -> str:
 
 
 def normalize_whitespace(source: str) -> str:
-    lines = [line.strip() for line in source.splitlines() if line.strip()]
+    # rstrip only -- stripping leading whitespace destroys Python's
+    # indentation-based block structure and makes the output unparseable.
+    # Blank lines are still dropped, and trailing whitespace removed.
+    lines = [line.rstrip() for line in source.splitlines() if line.strip()]
     return "\n".join(lines)
 
 

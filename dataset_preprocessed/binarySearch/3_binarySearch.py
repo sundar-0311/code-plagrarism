@@ -1,0 +1,9 @@
+import bisect
+def VAR1(VAR2, VAR3):
+    VAR4 = VAR5.bisect_left(VAR2, VAR3)
+    if VAR4 < len(VAR2) and VAR2[VAR4] == VAR3:
+        return VAR4
+    return -1
+VAR6 = [10, 20, 30, 40, 50, 60, 70]
+VAR7 = VAR1(VAR6, 50)
+print('Index:', VAR7)
