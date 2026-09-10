@@ -1,0 +1,1 @@
+def VAR1 ( VAR2 ) : VAR3 = len ( VAR2 ) for VAR4 in range ( VAR3 ) : for VAR5 in range ( VAR3 - VAR4 - 1 ) : if VAR2 [ VAR5 ] > VAR2 [ VAR5 + 1 ] : VAR6 = VAR2 [ VAR5 ] VAR2 [ VAR5 ] = VAR2 [ VAR5 + 1 ] VAR2 [ VAR5 + 1 ] = VAR6 return VAR2 VAR7 = [ 64 , 34 , 25 , 12 , 22 , 11 , 90 ] print ( 'Original:' , VAR7 ) print ( 'Sorted:' , VAR1 ( VAR7 ) )

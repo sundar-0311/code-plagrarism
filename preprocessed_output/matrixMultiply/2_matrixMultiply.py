@@ -1,0 +1,7 @@
+def VAR1(VAR2, VAR3):
+    return [[sum((VAR4 * VAR5 for VAR4, VAR5 in zip(VAR6, VAR7))) for VAR7 in zip(*VAR3)] for VAR6 in VAR2]
+VAR8 = [[1, 2], [3, 4]]
+VAR9 = [[5, 6], [7, 8]]
+VAR10 = VAR1(VAR8, VAR9)
+for VAR6 in VAR10:
+    print(VAR6)

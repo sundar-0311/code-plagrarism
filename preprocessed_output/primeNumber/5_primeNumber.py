@@ -1,0 +1,14 @@
+def VAR1(VAR2):
+    if VAR2 <= 1:
+        return False
+    VAR3 = 2
+    while VAR3 < VAR2:
+        if VAR2 % VAR3 == 0:
+            return False
+        VAR3 += 1
+    return True
+VAR4 = 29
+if VAR1(VAR4):
+    print('Prime')
+else:
+    print('Not Prime')

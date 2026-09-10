@@ -1,0 +1,9 @@
+def VAR1(VAR2):
+    if VAR2 <= 1:
+        return False
+    for VAR3 in range(2, VAR2):
+        if VAR2 % VAR3 == 0:
+            return False
+    return True
+VAR4 = 29
+print(VAR1(VAR4))
