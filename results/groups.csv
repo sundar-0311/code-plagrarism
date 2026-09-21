@@ -1,0 +1,9 @@
+problem_id,group_id,size,files,num_flagged_edges,avg_composite
+binarySearch,binarySearch_1,4,1_binarySearch.py;4_binarySearch.py;5_binarySearch.py;6_binarySearch.py,6,0.663
+bubblesort,bubblesort_1,6,1_bubblesort.py;2_bubble_sort.py;3_bubble_sort.py;4_sort_selection.py;5_bubble_sort.py;6_bubble_sort.py,10,0.6029
+factorial,factorial_1,4,1_factorial.py;4_factorial.py;5_factorial.py;6_factorial.py,6,0.6879
+fibonacci,fibonacci_1,4,1_fibonacci.py;4_fibonacci.py;5_fibonacci.py;6_fibonacci.py,6,0.632
+matrixMultiply,matrixMultiply_1,4,1_matrixMultiply.py;4_matrixMultiply.py;5_matrixMultiply.py;6_matrixMultiply.py,6,0.6298
+palindrome,palindrome_1,3,1_palindrome.py;4_palindrome.py;6_palindrome.py,3,0.6841
+primeNumber,primeNumber_1,4,1_primeNumber.py;4_primeNumber.py;5_primeNumber.py;6_primeNumber.py,4,0.6052
+reverseLL,reverseLL_1,5,1_reverseLL.py;2_reverseLL.py;4_reverseLL.py;5_reverseLL.py;6_reverseLL.py,9,0.6959

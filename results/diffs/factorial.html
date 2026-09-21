@@ -1,0 +1,189 @@
+<html><head><meta charset='utf-8'><title>factorial diffs</title>
+<style>
+  body { font-family: -apple-system, Arial, sans-serif; margin: 2rem; background: #fafafa; color: #222; }
+  h1 { margin-bottom: 0.2rem; }
+  .pair { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.5rem; margin-bottom: 2rem; }
+  .signals { font-size: 0.85rem; color: #555; }
+  .sig { display: inline-block; margin-right: 1rem; background: #eef; padding: 2px 6px; border-radius: 4px; }
+  table.diff { font-family: Consolas, monospace; font-size: 0.8rem; border-collapse: collapse; width: 100%; }
+  table.diff td { padding: 1px 4px; }
+  .diff_header { background: #f0f0f0; }
+  td.diff_header { text-align: right; color: #888; }
+  .diff_next { background: #f0f0f0; }
+  .diff_add { background: #d4f7d4; }
+  .diff_chg { background: #fff3b8; }
+  .diff_sub { background: #fdd; }
+  a { color: #06c; }
+</style>
+</head><body><h1>factorial</h1><p><a href='index.html'>&larr; back to index</a></p>
+    <section class="pair">
+      <h2>factorial: 1_factorial.py vs 4_factorial.py</h2>
+      <p>composite = <b>1.000</b> &middot; FLAGGED &middot; ground truth: PLAGIARIZED</p>
+      <p class="signals"><span class='sig'>jaccard: 1.000</span> <span class='sig'>winnow: 1.000</span> <span class='sig'>structural: 1.000</span> <span class='sig'>embedding: 1.000</span></p>
+      
+    <table class="diff" id="difflib_chg_to16__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">1_factorial.py</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">4_factorial.py</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next" id="difflib_chg_to16__1"><a href="#difflib_chg_to16__1">n</a></td><td class="diff_header" id="from16_1">1</td><td nowrap="nowrap">def&nbsp;factorial(n):</td><td class="diff_next"><a href="#difflib_chg_to16__1">n</a></td><td class="diff_header" id="to16_1">1</td><td nowrap="nowrap">def&nbsp;factorial(n<span class="diff_add">um</span>):</td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to16__2"></td><td class="diff_header" id="from16_2">2</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;1</span></td><td class="diff_next"></td><td class="diff_header" id="to16_2">2</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;ans&nbsp;=&nbsp;1</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from16_3">3</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to16_3">3</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to16__2">n</a></td><td class="diff_header" id="from16_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_chg">i</span>&nbsp;in&nbsp;range(1,&nbsp;n&nbsp;+&nbsp;1):</td><td class="diff_next"><a href="#difflib_chg_to16__2">n</a></td><td class="diff_header" id="to16_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_chg">x</span>&nbsp;in&nbsp;range(1,&nbsp;n<span class="diff_add">um</span>&nbsp;+&nbsp;1):</td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to16__3"></td><td class="diff_header" id="from16_5">5</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;result&nbsp;*&nbsp;i</span></td><td class="diff_next"></td><td class="diff_header" id="to16_5">5</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ans&nbsp;=&nbsp;ans&nbsp;*&nbsp;x</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from16_6">6</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to16_6">6</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to16__4"><a href="#difflib_chg_to16__3">n</a></td><td class="diff_header" id="from16_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;<span class="diff_chg">re</span>s<span class="diff_sub">ult</span></td><td class="diff_next"><a href="#difflib_chg_to16__3">n</a></td><td class="diff_header" id="to16_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;<span class="diff_chg">an</span>s</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from16_8">8</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to16_8">8</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from16_9">9</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to16_9">9</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to16__4">n</a></td><td class="diff_header" id="from16_10">10</td><td nowrap="nowrap"><span class="diff_sub">number&nbsp;=&nbsp;5</span></td><td class="diff_next"><a href="#difflib_chg_to16__4">n</a></td><td class="diff_header" id="to16_10">10</td><td nowrap="nowrap"><span class="diff_add">n&nbsp;=&nbsp;5</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from16_11">11</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to16_11">11</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to16__top">t</a></td><td class="diff_header" id="from16_12">12</td><td nowrap="nowrap">print("Factorial:",&nbsp;factorial(n<span class="diff_sub">umber</span>))</td><td class="diff_next"><a href="#difflib_chg_to16__top">t</a></td><td class="diff_header" id="to16_12">12</td><td nowrap="nowrap">print("Factorial:",&nbsp;factorial(n))</td></tr>
+        </tbody>
+    </table>
+    </section>
+    
+    <section class="pair">
+      <h2>factorial: 1_factorial.py vs 5_factorial.py</h2>
+      <p>composite = <b>0.723</b> &middot; FLAGGED &middot; ground truth: PLAGIARIZED</p>
+      <p class="signals"><span class='sig'>jaccard: 0.511</span> <span class='sig'>winnow: 0.444</span> <span class='sig'>structural: 0.932</span> <span class='sig'>embedding: 0.999</span></p>
+      
+    <table class="diff" id="difflib_chg_to17__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">1_factorial.py</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">5_factorial.py</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next" id="difflib_chg_to17__1"><a href="#difflib_chg_to17__1">n</a></td><td class="diff_header" id="from17_1">1</td><td nowrap="nowrap"><span class="diff_sub">def&nbsp;factorial(n):</span></td><td class="diff_next"><a href="#difflib_chg_to17__1">n</a></td><td class="diff_header" id="to17_1">1</td><td nowrap="nowrap"><span class="diff_add">def&nbsp;get_result(value):</span></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to17__2"></td><td class="diff_header" id="from17_2">2</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;1</span></td><td class="diff_next"></td><td class="diff_header" id="to17_2">2</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;total&nbsp;=&nbsp;1</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from17_3">3</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to17_3">3</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to17__2">n</a></td><td class="diff_header" id="from17_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_chg">i</span>&nbsp;in&nbsp;range(1,&nbsp;<span class="diff_chg">n</span>&nbsp;+&nbsp;1):</td><td class="diff_next"><a href="#difflib_chg_to17__2">n</a></td><td class="diff_header" id="to17_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_chg">count</span>&nbsp;in&nbsp;range(1,&nbsp;<span class="diff_chg">value</span>&nbsp;+&nbsp;1):</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from17_5">5</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;result&nbsp;*&nbsp;i</span></td><td class="diff_next"></td><td class="diff_header" id="to17_5">5</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total&nbsp;*=&nbsp;count</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from17_6">6</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to17_6">6</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to17__3"><a href="#difflib_chg_to17__3">n</a></td><td class="diff_header" id="from17_7">7</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;result</span></td><td class="diff_next"><a href="#difflib_chg_to17__3">n</a></td><td class="diff_header" id="to17_7">7</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;total</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from17_8">8</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to17_8">8</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from17_9">9</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to17_9">9</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from17_10">10</td><td nowrap="nowrap">number&nbsp;=&nbsp;5</td><td class="diff_next"></td><td class="diff_header" id="to17_10">10</td><td nowrap="nowrap">number&nbsp;=&nbsp;5</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from17_11">11</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to17_11">11</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to17__top">t</a></td><td class="diff_header" id="from17_12">12</td><td nowrap="nowrap"><span class="diff_sub">print("Factorial:",&nbsp;factorial(number))</span></td><td class="diff_next"><a href="#difflib_chg_to17__top">t</a></td><td class="diff_header" id="to17_12">12</td><td nowrap="nowrap"><span class="diff_add">print(get_result(number))</span></td></tr>
+        </tbody>
+    </table>
+    </section>
+    
+    <section class="pair">
+      <h2>factorial: 4_factorial.py vs 5_factorial.py</h2>
+      <p>composite = <b>0.723</b> &middot; FLAGGED &middot; ground truth: PLAGIARIZED</p>
+      <p class="signals"><span class='sig'>jaccard: 0.511</span> <span class='sig'>winnow: 0.444</span> <span class='sig'>structural: 0.932</span> <span class='sig'>embedding: 0.999</span></p>
+      
+    <table class="diff" id="difflib_chg_to18__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">4_factorial.py</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">5_factorial.py</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next" id="difflib_chg_to18__1"><a href="#difflib_chg_to18__1">n</a></td><td class="diff_header" id="from18_1">1</td><td nowrap="nowrap"><span class="diff_sub">def&nbsp;factorial(num):</span></td><td class="diff_next"><a href="#difflib_chg_to18__1">n</a></td><td class="diff_header" id="to18_1">1</td><td nowrap="nowrap"><span class="diff_add">def&nbsp;get_result(value):</span></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to18__2"></td><td class="diff_header" id="from18_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;a<span class="diff_chg">ns</span>&nbsp;=&nbsp;1</td><td class="diff_next"></td><td class="diff_header" id="to18_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;<span class="diff_add">tot</span>a<span class="diff_chg">l</span>&nbsp;=&nbsp;1</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from18_3">3</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to18_3">3</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to18__2">n</a></td><td class="diff_header" id="from18_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_chg">x</span>&nbsp;in&nbsp;range(1,&nbsp;<span class="diff_chg">n</span>u<span class="diff_chg">m</span>&nbsp;+&nbsp;1):</td><td class="diff_next"><a href="#difflib_chg_to18__2">n</a></td><td class="diff_header" id="to18_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_chg">count</span>&nbsp;in&nbsp;range(1,&nbsp;<span class="diff_chg">val</span>u<span class="diff_chg">e</span>&nbsp;+&nbsp;1):</td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to18__3"></td><td class="diff_header" id="from18_5">5</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ans&nbsp;=&nbsp;ans&nbsp;*&nbsp;x</span></td><td class="diff_next"></td><td class="diff_header" id="to18_5">5</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total&nbsp;*=&nbsp;count</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from18_6">6</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to18_6">6</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to18__4"><a href="#difflib_chg_to18__3">n</a></td><td class="diff_header" id="from18_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;a<span class="diff_chg">ns</span></td><td class="diff_next"><a href="#difflib_chg_to18__3">n</a></td><td class="diff_header" id="to18_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;<span class="diff_add">tot</span>a<span class="diff_chg">l</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from18_8">8</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to18_8">8</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from18_9">9</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to18_9">9</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to18__4">n</a></td><td class="diff_header" id="from18_10">10</td><td nowrap="nowrap"><span class="diff_sub">n&nbsp;=&nbsp;5</span></td><td class="diff_next"><a href="#difflib_chg_to18__4">n</a></td><td class="diff_header" id="to18_10">10</td><td nowrap="nowrap"><span class="diff_add">number&nbsp;=&nbsp;5</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from18_11">11</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to18_11">11</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to18__top">t</a></td><td class="diff_header" id="from18_12">12</td><td nowrap="nowrap"><span class="diff_sub">print("Factorial:",&nbsp;factorial(n))</span></td><td class="diff_next"><a href="#difflib_chg_to18__top">t</a></td><td class="diff_header" id="to18_12">12</td><td nowrap="nowrap"><span class="diff_add">print(get_result(number))</span></td></tr>
+        </tbody>
+    </table>
+    </section>
+    
+    <section class="pair">
+      <h2>factorial: 5_factorial.py vs 6_factorial.py</h2>
+      <p>composite = <b>0.634</b> &middot; FLAGGED &middot; ground truth: PLAGIARIZED</p>
+      <p class="signals"><span class='sig'>jaccard: 0.273</span> <span class='sig'>winnow: 0.263</span> <span class='sig'>structural: 0.913</span> <span class='sig'>embedding: 0.998</span></p>
+      
+    <table class="diff" id="difflib_chg_to19__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">5_factorial.py</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">6_factorial.py</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next" id="difflib_chg_to19__1"><a href="#difflib_chg_to19__1">n</a></td><td class="diff_header" id="from19_1">1</td><td nowrap="nowrap"><span class="diff_sub">def&nbsp;get_result(value):</span></td><td class="diff_next"><a href="#difflib_chg_to19__1">n</a></td><td class="diff_header" id="to19_1">1</td><td nowrap="nowrap"><span class="diff_add">def&nbsp;calculate(n):</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from19_2">2</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;total&nbsp;=&nbsp;1</span></td><td class="diff_next"></td><td class="diff_header" id="to19_2">2</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;1</span></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to19__2"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to19_3">3</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;unused&nbsp;=&nbsp;100</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from19_3">3</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to19_4">4</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to19__2">n</a></td><td class="diff_header" id="from19_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_chg">count</span>&nbsp;in&nbsp;range(1,&nbsp;<span class="diff_chg">value</span>&nbsp;+&nbsp;1):</td><td class="diff_next"><a href="#difflib_chg_to19__2">n</a></td><td class="diff_header" id="to19_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_chg">i</span>&nbsp;in&nbsp;range(1,&nbsp;<span class="diff_chg">n</span>&nbsp;+&nbsp;1):</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from19_5">5</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total&nbsp;*=&nbsp;count</span></td><td class="diff_next"></td><td class="diff_header" id="to19_6">6</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;*=&nbsp;i</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from19_6">6</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to19_7">7</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to19__3">n</a></td><td class="diff_header" id="from19_7">7</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;total</span></td><td class="diff_next"><a href="#difflib_chg_to19__3">n</a></td><td class="diff_header" id="to19_8">8</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;"Done"</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to19_9">9</td><td nowrap="nowrap"><span class="diff_add">&nbsp;</span></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to19__3"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to19_10">10</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;result</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from19_8">8</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to19_11">11</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from19_9">9</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to19_12">12</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from19_10">10</td><td nowrap="nowrap">number&nbsp;=&nbsp;5</td><td class="diff_next"></td><td class="diff_header" id="to19_13">13</td><td nowrap="nowrap">number&nbsp;=&nbsp;5</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from19_11">11</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to19_14">14</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to19__top">t</a></td><td class="diff_header" id="from19_12">12</td><td nowrap="nowrap"><span class="diff_sub">print(get_result(number))</span></td><td class="diff_next"><a href="#difflib_chg_to19__top">t</a></td><td class="diff_header" id="to19_15">15</td><td nowrap="nowrap"><span class="diff_add">print(calculate(number))</span></td></tr>
+        </tbody>
+    </table>
+    </section>
+    
+    <section class="pair">
+      <h2>factorial: 1_factorial.py vs 6_factorial.py</h2>
+      <p>composite = <b>0.523</b> &middot; FLAGGED &middot; ground truth: PLAGIARIZED</p>
+      <p class="signals"><span class='sig'>jaccard: 0.194</span> <span class='sig'>winnow: 0.182</span> <span class='sig'>structural: 0.812</span> <span class='sig'>embedding: 0.998</span></p>
+      
+    <table class="diff" id="difflib_chg_to20__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">1_factorial.py</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">6_factorial.py</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next" id="difflib_chg_to20__2"><a href="#difflib_chg_to20__1">n</a></td><td class="diff_header" id="from20_1">1</td><td nowrap="nowrap"><span class="diff_sub">def&nbsp;factorial(n):</span></td><td class="diff_next"><a href="#difflib_chg_to20__1">n</a></td><td class="diff_header" id="to20_1">1</td><td nowrap="nowrap"><span class="diff_add">def&nbsp;calculate(n):</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from20_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;1</td><td class="diff_next"></td><td class="diff_header" id="to20_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;1</td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to20__2">n</a></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"><a href="#difflib_chg_to20__2">n</a></td><td class="diff_header" id="to20_3">3</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;unused&nbsp;=&nbsp;100</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from20_3">3</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to20_4">4</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from20_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(1,&nbsp;n&nbsp;+&nbsp;1):</td><td class="diff_next"></td><td class="diff_header" id="to20_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(1,&nbsp;n&nbsp;+&nbsp;1):</td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to20__3">n</a></td><td class="diff_header" id="from20_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;<span class="diff_sub">result&nbsp;*&nbsp;</span>i</td><td class="diff_next"><a href="#difflib_chg_to20__3">n</a></td><td class="diff_header" id="to20_6">6</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;<span class="diff_add">*</span>=&nbsp;i</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to20_7">7</td><td nowrap="nowrap"><span class="diff_add">&nbsp;</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to20_8">8</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;"Done"</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from20_6">6</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to20_9">9</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to20__3"></td><td class="diff_header" id="from20_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;result</td><td class="diff_next"></td><td class="diff_header" id="to20_10">10</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;result</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from20_8">8</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to20_11">11</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from20_9">9</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to20_12">12</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from20_10">10</td><td nowrap="nowrap">number&nbsp;=&nbsp;5</td><td class="diff_next"></td><td class="diff_header" id="to20_13">13</td><td nowrap="nowrap">number&nbsp;=&nbsp;5</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from20_11">11</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to20_14">14</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to20__top">t</a></td><td class="diff_header" id="from20_12">12</td><td nowrap="nowrap"><span class="diff_sub">print("Factorial:",&nbsp;factorial(number))</span></td><td class="diff_next"><a href="#difflib_chg_to20__top">t</a></td><td class="diff_header" id="to20_15">15</td><td nowrap="nowrap"><span class="diff_add">print(calculate(number))</span></td></tr>
+        </tbody>
+    </table>
+    </section>
+    
+    <section class="pair">
+      <h2>factorial: 4_factorial.py vs 6_factorial.py</h2>
+      <p>composite = <b>0.523</b> &middot; FLAGGED &middot; ground truth: PLAGIARIZED</p>
+      <p class="signals"><span class='sig'>jaccard: 0.194</span> <span class='sig'>winnow: 0.182</span> <span class='sig'>structural: 0.812</span> <span class='sig'>embedding: 0.998</span></p>
+      
+    <table class="diff" id="difflib_chg_to21__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">4_factorial.py</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">6_factorial.py</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next" id="difflib_chg_to21__1"><a href="#difflib_chg_to21__1">n</a></td><td class="diff_header" id="from21_1">1</td><td nowrap="nowrap"><span class="diff_sub">def&nbsp;factorial(num):</span></td><td class="diff_next"><a href="#difflib_chg_to21__1">n</a></td><td class="diff_header" id="to21_1">1</td><td nowrap="nowrap"><span class="diff_add">def&nbsp;calculate(n):</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from21_2">2</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;ans&nbsp;=&nbsp;1</span></td><td class="diff_next"></td><td class="diff_header" id="to21_2">2</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;1</span></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to21__2"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to21_3">3</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;unused&nbsp;=&nbsp;100</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from21_3">3</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to21_4">4</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to21__2">n</a></td><td class="diff_header" id="from21_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_chg">x</span>&nbsp;in&nbsp;range(1,&nbsp;n<span class="diff_sub">um</span>&nbsp;+&nbsp;1):</td><td class="diff_next"><a href="#difflib_chg_to21__2">n</a></td><td class="diff_header" id="to21_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_chg">i</span>&nbsp;in&nbsp;range(1,&nbsp;n&nbsp;+&nbsp;1):</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from21_5">5</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ans&nbsp;=&nbsp;ans&nbsp;*&nbsp;x</span></td><td class="diff_next"></td><td class="diff_header" id="to21_6">6</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;*=&nbsp;i</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from21_6">6</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to21_7">7</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to21__3"><a href="#difflib_chg_to21__3">n</a></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"><a href="#difflib_chg_to21__3">n</a></td><td class="diff_header" id="to21_8">8</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;"Done"</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to21_9">9</td><td nowrap="nowrap"><span class="diff_add">&nbsp;</span></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to21__4"></td><td class="diff_header" id="from21_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;<span class="diff_chg">an</span>s</td><td class="diff_next"></td><td class="diff_header" id="to21_10">10</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;<span class="diff_chg">re</span>s<span class="diff_add">ult</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from21_8">8</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to21_11">11</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from21_9">9</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to21_12">12</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to21__4">n</a></td><td class="diff_header" id="from21_10">10</td><td nowrap="nowrap"><span class="diff_sub">n&nbsp;=&nbsp;5</span></td><td class="diff_next"><a href="#difflib_chg_to21__4">n</a></td><td class="diff_header" id="to21_13">13</td><td nowrap="nowrap"><span class="diff_add">number&nbsp;=&nbsp;5</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from21_11">11</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to21_14">14</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to21__top">t</a></td><td class="diff_header" id="from21_12">12</td><td nowrap="nowrap"><span class="diff_sub">print("Factorial:",&nbsp;factorial(n))</span></td><td class="diff_next"><a href="#difflib_chg_to21__top">t</a></td><td class="diff_header" id="to21_15">15</td><td nowrap="nowrap"><span class="diff_add">print(calculate(number))</span></td></tr>
+        </tbody>
+    </table>
+    </section>
+    </body></html>

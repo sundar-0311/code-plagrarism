@@ -1,0 +1,161 @@
+<html><head><meta charset='utf-8'><title>primeNumber diffs</title>
+<style>
+  body { font-family: -apple-system, Arial, sans-serif; margin: 2rem; background: #fafafa; color: #222; }
+  h1 { margin-bottom: 0.2rem; }
+  .pair { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.5rem; margin-bottom: 2rem; }
+  .signals { font-size: 0.85rem; color: #555; }
+  .sig { display: inline-block; margin-right: 1rem; background: #eef; padding: 2px 6px; border-radius: 4px; }
+  table.diff { font-family: Consolas, monospace; font-size: 0.8rem; border-collapse: collapse; width: 100%; }
+  table.diff td { padding: 1px 4px; }
+  .diff_header { background: #f0f0f0; }
+  td.diff_header { text-align: right; color: #888; }
+  .diff_next { background: #f0f0f0; }
+  .diff_add { background: #d4f7d4; }
+  .diff_chg { background: #fff3b8; }
+  .diff_sub { background: #fdd; }
+  a { color: #06c; }
+</style>
+</head><body><h1>primeNumber</h1><p><a href='index.html'>&larr; back to index</a></p>
+    <section class="pair">
+      <h2>primeNumber: 1_primeNumber.py vs 4_primeNumber.py</h2>
+      <p>composite = <b>0.710</b> &middot; FLAGGED &middot; ground truth: PLAGIARIZED</p>
+      <p class="signals"><span class='sig'>jaccard: 0.542</span> <span class='sig'>winnow: 0.565</span> <span class='sig'>structural: 0.854</span> <span class='sig'>embedding: 0.998</span></p>
+      
+    <table class="diff" id="difflib_chg_to37__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">1_primeNumber.py</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">4_primeNumber.py</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next" id="difflib_chg_to37__1"><a href="#difflib_chg_to37__1">n</a></td><td class="diff_header" id="from37_1">1</td><td nowrap="nowrap"><span class="diff_sub">def&nbsp;is_prime(n):</span></td><td class="diff_next"><a href="#difflib_chg_to37__1">n</a></td><td class="diff_header" id="to37_1">1</td><td nowrap="nowrap"><span class="diff_add">def&nbsp;check_number(value):</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;<span class="diff_chg">n</span>&nbsp;&lt;=&nbsp;1:</td><td class="diff_next"></td><td class="diff_header" id="to37_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;<span class="diff_chg">value</span>&nbsp;&lt;=&nbsp;1:</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td><td class="diff_next"></td><td class="diff_header" id="to37_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_4">4</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to37_4">4</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to37__2">n</a></td><td class="diff_header" id="from37_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(2,&nbsp;<span class="diff_chg">n</span>):</td><td class="diff_next"><a href="#difflib_chg_to37__2">n</a></td><td class="diff_header" id="to37_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class="diff_add">d</span>i<span class="diff_add">visor</span>&nbsp;in&nbsp;range(2,&nbsp;<span class="diff_chg">value</span>):</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_6">6</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;<span class="diff_chg">n</span>&nbsp;%&nbsp;i&nbsp;==&nbsp;0:</td><td class="diff_next"></td><td class="diff_header" id="to37_6">6</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;<span class="diff_chg">value</span>&nbsp;%&nbsp;<span class="diff_add">d</span>i<span class="diff_add">visor</span>&nbsp;==&nbsp;0:</td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to37__2"></td><td class="diff_header" id="from37_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td><td class="diff_next"></td><td class="diff_header" id="to37_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_8">8</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to37_8">8</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to37__3"></td><td class="diff_header" id="from37_9">9</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True</td><td class="diff_next"></td><td class="diff_header" id="to37_9">9</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_10">10</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to37_10">10</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_11">11</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to37_11">11</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to37__3">n</a></td><td class="diff_header" id="from37_12">12</td><td nowrap="nowrap"><span class="diff_sub">number&nbsp;=&nbsp;29</span></td><td class="diff_next"><a href="#difflib_chg_to37__3">n</a></td><td class="diff_header" id="to37_12">12</td><td nowrap="nowrap"><span class="diff_add">n&nbsp;=&nbsp;29</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_13">13</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to37_13">13</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to37__top">t</a></td><td class="diff_header" id="from37_14">14</td><td nowrap="nowrap"><span class="diff_sub">if&nbsp;is_prime(number):</span></td><td class="diff_next"><a href="#difflib_chg_to37__top">t</a></td><td class="diff_header" id="to37_14">14</td><td nowrap="nowrap"><span class="diff_add">print(check_number(n))</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_15">15</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;print("Prime&nbsp;number")</span></td><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_16">16</td><td nowrap="nowrap"><span class="diff_sub">else:</span></td><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from37_17">17</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;print("Not&nbsp;a&nbsp;prime&nbsp;number")</span></td><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td></tr>
+        </tbody>
+    </table>
+    </section>
+    
+    <section class="pair">
+      <h2>primeNumber: 1_primeNumber.py vs 5_primeNumber.py</h2>
+      <p>composite = <b>0.657</b> &middot; FLAGGED &middot; ground truth: PLAGIARIZED</p>
+      <p class="signals"><span class='sig'>jaccard: 0.338</span> <span class='sig'>winnow: 0.367</span> <span class='sig'>structural: 0.889</span> <span class='sig'>embedding: 0.998</span></p>
+      
+    <table class="diff" id="difflib_chg_to38__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">1_primeNumber.py</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">5_primeNumber.py</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next" id="difflib_chg_to38__1"><a href="#difflib_chg_to38__1">n</a></td><td class="diff_header" id="from38_1">1</td><td nowrap="nowrap"><span class="diff_sub">def&nbsp;is_prime(n):</span></td><td class="diff_next"><a href="#difflib_chg_to38__1">n</a></td><td class="diff_header" id="to38_1">1</td><td nowrap="nowrap"><span class="diff_add">def&nbsp;verify_prime(number):</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;n&nbsp;&lt;=&nbsp;1:</td><td class="diff_next"></td><td class="diff_header" id="to38_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;n<span class="diff_add">umber</span>&nbsp;&lt;=&nbsp;1:</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td><td class="diff_next"></td><td class="diff_header" id="to38_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_4">4</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to38_4">4</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to38__2"><a href="#difflib_chg_to38__2">n</a></td><td class="diff_header" id="from38_5">5</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(2,&nbsp;n):</span></td><td class="diff_next"><a href="#difflib_chg_to38__2">n</a></td><td class="diff_header" id="to38_5">5</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;divisor&nbsp;=&nbsp;2</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to38_6">6</td><td nowrap="nowrap"><span class="diff_add">&nbsp;</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to38_7">7</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;divisor&nbsp;&lt;&nbsp;number:</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_6">6</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;n&nbsp;%&nbsp;i&nbsp;==&nbsp;0:</td><td class="diff_next"></td><td class="diff_header" id="to38_8">8</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;n<span class="diff_add">umber</span>&nbsp;%&nbsp;<span class="diff_add">d</span>i<span class="diff_add">visor</span>&nbsp;==&nbsp;0:</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td><td class="diff_next"></td><td class="diff_header" id="to38_9">9</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to38__3">n</a></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"><a href="#difflib_chg_to38__3">n</a></td><td class="diff_header" id="to38_10">10</td><td nowrap="nowrap"><span class="diff_add">&nbsp;</span></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to38__3"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to38_11">11</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;divisor&nbsp;+=&nbsp;1</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_8">8</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to38_12">12</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to38__4"></td><td class="diff_header" id="from38_9">9</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True</td><td class="diff_next"></td><td class="diff_header" id="to38_13">13</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_10">10</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to38_14">14</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_11">11</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to38_15">15</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to38__5"><a href="#difflib_chg_to38__4">n</a></td><td class="diff_header" id="from38_12">12</td><td nowrap="nowrap"><span class="diff_sub">number&nbsp;=&nbsp;29</span></td><td class="diff_next"><a href="#difflib_chg_to38__4">n</a></td><td class="diff_header" id="to38_16">16</td><td nowrap="nowrap"><span class="diff_add">value&nbsp;=&nbsp;29</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_13">13</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to38_17">17</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to38__5">n</a></td><td class="diff_header" id="from38_14">14</td><td nowrap="nowrap"><span class="diff_sub">if&nbsp;is_prime(number):</span></td><td class="diff_next"><a href="#difflib_chg_to38__5">n</a></td><td class="diff_header" id="to38_18">18</td><td nowrap="nowrap"><span class="diff_add">if&nbsp;verify_prime(value):</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_15">15</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;print("Prime<span class="diff_sub">&nbsp;number</span>")</td><td class="diff_next"></td><td class="diff_header" id="to38_19">19</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;print("Prime")</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from38_16">16</td><td nowrap="nowrap">else:</td><td class="diff_next"></td><td class="diff_header" id="to38_20">20</td><td nowrap="nowrap">else:</td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to38__top">t</a></td><td class="diff_header" id="from38_17">17</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;print("Not&nbsp;<span class="diff_chg">a&nbsp;p</span>rime<span class="diff_sub">&nbsp;number</span>")</td><td class="diff_next"><a href="#difflib_chg_to38__top">t</a></td><td class="diff_header" id="to38_21">21</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;print("Not&nbsp;<span class="diff_chg">P</span>rime")</td></tr>
+        </tbody>
+    </table>
+    </section>
+    
+    <section class="pair">
+      <h2>primeNumber: 5_primeNumber.py vs 6_primeNumber.py</h2>
+      <p>composite = <b>0.540</b> &middot; FLAGGED &middot; ground truth: PLAGIARIZED</p>
+      <p class="signals"><span class='sig'>jaccard: 0.167</span> <span class='sig'>winnow: 0.212</span> <span class='sig'>structural: 0.816</span> <span class='sig'>embedding: 0.999</span></p>
+      
+    <table class="diff" id="difflib_chg_to39__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">5_primeNumber.py</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">6_primeNumber.py</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next" id="difflib_chg_to39__1"><a href="#difflib_chg_to39__1">n</a></td><td class="diff_header" id="from39_1">1</td><td nowrap="nowrap">def&nbsp;<span class="diff_chg">v</span>e<span class="diff_chg">rify</span>_prime(num<span class="diff_sub">ber</span>):</td><td class="diff_next"><a href="#difflib_chg_to39__1">n</a></td><td class="diff_header" id="to39_1">1</td><td nowrap="nowrap">def&nbsp;<span class="diff_chg">t</span>e<span class="diff_chg">st</span>_prime(num):</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;num<span class="diff_sub">ber</span>&nbsp;&lt;=&nbsp;1:</td><td class="diff_next"></td><td class="diff_header" id="to39_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;num&nbsp;&lt;=&nbsp;1:</td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to39__2"></td><td class="diff_header" id="from39_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td><td class="diff_next"></td><td class="diff_header" id="to39_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_4">4</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to39_4">4</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to39__2">n</a></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"><a href="#difflib_chg_to39__2">n</a></td><td class="diff_header" id="to39_5">5</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;unused&nbsp;=&nbsp;"prime"</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;<span class="diff_sub">d</span>i<span class="diff_sub">visor</span>&nbsp;=&nbsp;2</td><td class="diff_next"></td><td class="diff_header" id="to39_6">6</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;2</td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to39__3"></td><td class="diff_header" id="from39_6">6</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to39_7">7</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to39__3">n</a></td><td class="diff_header" id="from39_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;<span class="diff_sub">d</span>i<span class="diff_sub">visor</span>&nbsp;&lt;&nbsp;num<span class="diff_sub">ber</span>:</td><td class="diff_next"><a href="#difflib_chg_to39__3">n</a></td><td class="diff_header" id="to39_8">8</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;i&nbsp;&lt;&nbsp;num:</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_8">8</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;num<span class="diff_sub">ber</span>&nbsp;%&nbsp;<span class="diff_sub">d</span>i<span class="diff_sub">visor</span>&nbsp;==&nbsp;0:</td><td class="diff_next"></td><td class="diff_header" id="to39_9">9</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;num&nbsp;%&nbsp;i&nbsp;==&nbsp;0:</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_9">9</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td><td class="diff_next"></td><td class="diff_header" id="to39_10">10</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_10">10</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to39_11">11</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to39__4">n</a></td><td class="diff_header" id="from39_11">11</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="diff_sub">d</span>i<span class="diff_sub">visor</span>&nbsp;+=&nbsp;1</td><td class="diff_next"><a href="#difflib_chg_to39__4">n</a></td><td class="diff_header" id="to39_12">12</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;+=&nbsp;1</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to39_13">13</td><td nowrap="nowrap"><span class="diff_add">&nbsp;</span></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to39__4"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to39_14">14</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;"finished"</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_12">12</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to39_15">15</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to39__5"></td><td class="diff_header" id="from39_13">13</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True</td><td class="diff_next"></td><td class="diff_header" id="to39_16">16</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_14">14</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to39_17">17</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_15">15</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to39_18">18</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to39__5">n</a></td><td class="diff_header" id="from39_16">16</td><td nowrap="nowrap"><span class="diff_sub">value&nbsp;=&nbsp;29</span></td><td class="diff_next"><a href="#difflib_chg_to39__5">n</a></td><td class="diff_header" id="to39_19">19</td><td nowrap="nowrap"><span class="diff_add">number&nbsp;=&nbsp;29</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_17">17</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to39_20">20</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to39__top">t</a></td><td class="diff_header" id="from39_18">18</td><td nowrap="nowrap"><span class="diff_sub">if&nbsp;verify_prime(value):</span></td><td class="diff_next"><a href="#difflib_chg_to39__top">t</a></td><td class="diff_header" id="to39_21">21</td><td nowrap="nowrap"><span class="diff_add">print(test_prime(number))</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_19">19</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;print("Prime")</span></td><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_20">20</td><td nowrap="nowrap"><span class="diff_sub">else:</span></td><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from39_21">21</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;print("Not&nbsp;Prime")</span></td><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td></tr>
+        </tbody>
+    </table>
+    </section>
+    
+    <section class="pair">
+      <h2>primeNumber: 4_primeNumber.py vs 6_primeNumber.py</h2>
+      <p>composite = <b>0.513</b> &middot; FLAGGED &middot; ground truth: PLAGIARIZED</p>
+      <p class="signals"><span class='sig'>jaccard: 0.162</span> <span class='sig'>winnow: 0.167</span> <span class='sig'>structural: 0.811</span> <span class='sig'>embedding: 0.996</span></p>
+      
+    <table class="diff" id="difflib_chg_to40__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">4_primeNumber.py</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">6_primeNumber.py</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next" id="difflib_chg_to40__1"><a href="#difflib_chg_to40__1">n</a></td><td class="diff_header" id="from40_1">1</td><td nowrap="nowrap"><span class="diff_sub">def&nbsp;check_number(value):</span></td><td class="diff_next"><a href="#difflib_chg_to40__1">n</a></td><td class="diff_header" id="to40_1">1</td><td nowrap="nowrap"><span class="diff_add">def&nbsp;test_prime(num):</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from40_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;<span class="diff_chg">val</span>u<span class="diff_chg">e</span>&nbsp;&lt;=&nbsp;1:</td><td class="diff_next"></td><td class="diff_header" id="to40_2">2</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;<span class="diff_chg">n</span>u<span class="diff_chg">m</span>&nbsp;&lt;=&nbsp;1:</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from40_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td><td class="diff_next"></td><td class="diff_header" id="to40_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from40_4">4</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_4">4</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to40__2">n</a></td><td class="diff_header" id="from40_5">5</td><td nowrap="nowrap"><span class="diff_sub">&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;divisor&nbsp;in&nbsp;range(2,&nbsp;value):</span></td><td class="diff_next"><a href="#difflib_chg_to40__2">n</a></td><td class="diff_header" id="to40_5">5</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;unused&nbsp;=&nbsp;"prime"</span></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to40__2"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_6">6</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;2</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_7">7</td><td nowrap="nowrap"><span class="diff_add">&nbsp;</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_8">8</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;i&nbsp;&lt;&nbsp;num:</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from40_6">6</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;<span class="diff_chg">val</span>u<span class="diff_chg">e</span>&nbsp;%&nbsp;<span class="diff_sub">d</span>i<span class="diff_sub">visor</span>&nbsp;==&nbsp;0:</td><td class="diff_next"></td><td class="diff_header" id="to40_9">9</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;<span class="diff_chg">n</span>u<span class="diff_chg">m</span>&nbsp;%&nbsp;i&nbsp;==&nbsp;0:</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from40_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td><td class="diff_next"></td><td class="diff_header" id="to40_10">10</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False</td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to40__3">n</a></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"><a href="#difflib_chg_to40__3">n</a></td><td class="diff_header" id="to40_11">11</td><td nowrap="nowrap"><span class="diff_add">&nbsp;</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_12">12</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;+=&nbsp;1</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_13">13</td><td nowrap="nowrap"><span class="diff_add">&nbsp;</span></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to40__3"></td><td class="diff_header"></td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_14">14</td><td nowrap="nowrap"><span class="diff_add">&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;"finished"</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from40_8">8</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_15">15</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next" id="difflib_chg_to40__4"></td><td class="diff_header" id="from40_9">9</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True</td><td class="diff_next"></td><td class="diff_header" id="to40_16">16</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from40_10">10</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_17">17</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from40_11">11</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_18">18</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to40__4">n</a></td><td class="diff_header" id="from40_12">12</td><td nowrap="nowrap"><span class="diff_sub">n&nbsp;=&nbsp;29</span></td><td class="diff_next"><a href="#difflib_chg_to40__4">n</a></td><td class="diff_header" id="to40_19">19</td><td nowrap="nowrap"><span class="diff_add">number&nbsp;=&nbsp;29</span></td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from40_13">13</td><td nowrap="nowrap"></td><td class="diff_next"></td><td class="diff_header" id="to40_20">20</td><td nowrap="nowrap"></td></tr>
+            <tr><td class="diff_next"><a href="#difflib_chg_to40__top">t</a></td><td class="diff_header" id="from40_14">14</td><td nowrap="nowrap"><span class="diff_sub">print(check_number(n))</span></td><td class="diff_next"><a href="#difflib_chg_to40__top">t</a></td><td class="diff_header" id="to40_21">21</td><td nowrap="nowrap"><span class="diff_add">print(test_prime(number))</span></td></tr>
+        </tbody>
+    </table>
+    </section>
+    </body></html>
