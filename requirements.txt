@@ -1,0 +1,13 @@
+streamlit
+plotly
+networkx
+pandas
+numpy
+scikit-learn
+numpy
+pandas
+scikit-learn
+torch
+transformers==4.46.3
+tree-sitter
+tree-sitter-python
