@@ -11,7 +11,19 @@ Signals (one CSV each, all keyed by problem + file names):
     embedding         <- results/embedding_<backend>.csv  (your Day 2)
 
 Run from the repo root:
-    python similarity_engine/composite.py --embedding-csv results/embedding_codebert.csv
+    python similarity_engine/composite.py
+
+The default embedding backend is CodeBERT (results/embedding_codebert.csv) --
+it measurably outperforms GraphCodeBERT on this dataset (composite AUC 0.933
+vs 0.898; GraphCodeBERT's embedding signal alone scored 0.735 AUC, worse than
+CodeBERT's 0.806, likely because raw pretrained cosine similarity is poorly
+calibrated without task-specific fine-tuning -- true of both backends, but
+more pronounced for GraphCodeBERT's more complex, less pooling-optimized
+input on a dataset this small). GraphCodeBERT remains available and fully
+wired up (similarity_engine/dfg_extractor.py, GraphCodeBertEmbedder) --
+generate it with `embed_main.py --backend graphcodebert` and pass
+`--embedding-csv results/embedding_graphcodebert.csv` here if you want to
+reproduce that comparison.
 
 What it does, in order:
   1. Merge the four signals into one table (one row per pair).
@@ -178,6 +190,22 @@ def lopo(df, signals, y, step):
     return scores, preds
 
 
+def lopo_average(df, signals, y):
+    """Same leave-one-problem-out idea as lopo(), but for the no-embedding
+    fallback: there's no weight to fit (it's a plain mean), only a
+    threshold. Tuning it per-fold keeps the reported numbers honest in
+    the same way as the weighted model's LOPO run."""
+    avg = df[signals].to_numpy(dtype=float).mean(axis=1)
+    scores = np.zeros(len(df))
+    preds = np.zeros(len(df), dtype=bool)
+    for problem in df["problem_id"].unique():
+        test = (df["problem_id"] == problem).to_numpy()
+        t = best_threshold(avg[~test], y[~test])
+        scores[test] = avg[test]
+        preds[test] = avg[test] >= t
+    return scores, preds
+
+
 def metrics(y, preds, scores):
     p, r, f1, _ = precision_recall_fscore_support(y, preds, average="binary", zero_division=0)
     return {"precision": p, "recall": r, "f1": f1,
@@ -197,16 +225,40 @@ def print_table(title, rows):
 # ---------------------------------------------------------------------
 def load_model(path="results/composite_model.json"):
     m = json.loads(Path(path).read_text())
-    return {"signals": m["signals"], "lo": np.array(m["lo"]), "hi": np.array(m["hi"]),
-            "w": np.array(m["weights"]), "t": m["threshold"]}
+    model = {"signals": m["signals"], "lo": np.array(m["lo"]), "hi": np.array(m["hi"]),
+             "w": np.array(m["weights"]), "t": m["threshold"]}
+    if "no_embedding" in m:
+        model["no_embedding"] = m["no_embedding"]
+    return model
 
 
 def composite_score(model, signal_values: dict) -> tuple[float, bool]:
     """signal_values = {'jaccard': .., 'winnow': .., 'structural': .., 'embedding': ..}
-    Returns (composite score in [0,1], flagged?)."""
-    x = np.array([[signal_values[s] for s in model["signals"]]], dtype=float)
-    s = float(score(model, x)[0])
-    return s, s >= model["t"]
+    'embedding' may be omitted (e.g. embeddings switched off in the live-scan
+    UI, or no embedding backend was run) -- in that case this falls back to
+    a plain, unweighted average of jaccard/winnow/structural, checked
+    against a threshold tuned specifically for that 3-signal average (see
+    fit_no_embedding_threshold below), rather than misapplying the 4-signal
+    model's threshold to a differently-scaled score.
+    Returns (score in [0,1], flagged?)."""
+    if "embedding" in signal_values and signal_values["embedding"] is not None:
+        x = np.array([[signal_values[s] for s in model["signals"]]], dtype=float)
+        s = float(score(model, x)[0])
+        return s, s >= model["t"]
+
+    no_emb = model.get("no_embedding")
+    if no_emb is None:
+        raise ValueError(
+            "No 'embedding' value given and this model has no no_embedding "
+            "fallback threshold -- re-run composite.py to generate one."
+        )
+    avg = float(np.mean([signal_values["jaccard"], signal_values["winnow"], signal_values["structural"]]))
+    return avg, avg >= no_emb["threshold"]
+
+
+def verdict_label(flagged: bool) -> str:
+    """The one clear yes/no answer everything else feeds into."""
+    return "PLAGIARIZED" if flagged else "NOT PLAGIARIZED"
 
 
 # ---------------------------------------------------------------------
@@ -228,44 +280,96 @@ def main():
     y_family = family_labels(df, args.variants)
     y = y_family if args.labels == "family" else y_original
 
-    print(f"{len(df)} pairs merged. Labels used for tuning: '{args.labels}'")
-    print(f"  original labels : {y_original.sum()} plagiarized / {(y_original == 0).sum()} not")
-    print(f"  family labels   : {y_family.sum()} plagiarized / {(y_family == 0).sum()} not "
+    if args.labels == "original":
+        print("=" * 78)
+        print("WARNING: running with --labels original -- the RAW 1-3/4-6 labels,")
+        print("known to mislabel cross-family pairs as plagiarized (see the NOTE ON")
+        print("LABELS above and 2_build_pairs_csv.py). This run's model and metrics")
+        print("are for comparison/debugging only. DO NOT cite them as this project's")
+        print("reported performance -- use the default (--labels family) for that.")
+        print("=" * 78)
+
+    print(f"\n{len(df)} pairs merged. Labels used for tuning/reporting THIS run: '{args.labels}'")
+    print(f"  original (raw) labels : {y_original.sum()} plagiarized / {(y_original == 0).sum()} not")
+    print(f"  family (corrected)    : {y_family.sum()} plagiarized / {(y_family == 0).sum()} not "
           f"({int((y_original != y_family).sum())} pairs change label)")
 
     # --- how good is each signal alone? (threshold-free ranking quality)
+    # DIAGNOSTIC ONLY: the "original labels" column below exists to show
+    # HOW MUCH the raw-label bug distorted apparent performance, i.e. to
+    # document that the bug was found and measured -- it is not itself a
+    # result to report. Only the "family labels" column, and everything
+    # below that's tuned with args.labels == "family" (the default), is
+    # safe to cite as this project's actual performance.
     print("\nSingle-signal ROC-AUC  (0.5 = coin flip, 1.0 = perfect ranking)")
-    print(f"  {'signal':<12}{'original labels':>17}{'family labels':>16}")
+    print(f"  {'signal':<12}{'original (raw)':>17}{'family (report this)':>22}")
     for s in ALL_SIGNALS:
-        print(f"  {s:<12}{roc_auc_score(y_original, df[s]):>17.3f}{roc_auc_score(y_family, df[s]):>16.3f}")
+        print(f"  {s:<12}{roc_auc_score(y_original, df[s]):>17.3f}{roc_auc_score(y_family, df[s]):>22.3f}")
 
     # --- cross-validated comparison
     rows = []
     for s in ALL_SIGNALS:
         sc, pr = lopo(df, [s], y, args.step)
         rows.append((f"{s} alone", metrics(y, pr, sc)))
-    no_emb = [s for s in ALL_SIGNALS if s != "embedding"]
-    sc, pr = lopo(df, no_emb, y, args.step)
+    no_emb_signals = [s for s in ALL_SIGNALS if s != "embedding"]
+    sc, pr = lopo(df, no_emb_signals, y, args.step)
     rows.append(("composite WITHOUT embedding", metrics(y, pr, sc)))
+    avg_sc, avg_pr = lopo_average(df, no_emb_signals, y)
+    rows.append(("plain average, no embedding", metrics(y, avg_pr, avg_sc)))
     scores_all, preds_all = lopo(df, ALL_SIGNALS, y, args.step)
     rows.append(("composite (all 4 signals)", metrics(y, preds_all, scores_all)))
     print_table("Leave-one-problem-out results (each problem scored by a model that never saw it)", rows)
 
+    # --- per-problem breakdown, so a claim like "it fails on problem X"
+    # can be checked directly against this table instead of re-deriving
+    # it by hand.
+    check = pd.DataFrame({"problem_id": df["problem_id"], "y": y, "pred": preds_all})
+    print("\nLeave-one-problem-out results BY PROBLEM (composite, all 4 signals)")
+    print(f"  {'problem':<16}{'pairs':>7}{'wrong':>7}{'accuracy':>10}")
+    for problem, g in check.groupby("problem_id"):
+        wrong = int((g["pred"] != g["y"]).sum())
+        print(f"  {problem:<16}{len(g):>7}{wrong:>7}{1 - wrong / len(g):>10.3f}")
+
     # --- final model on all data
     model = fit(df[ALL_SIGNALS].to_numpy(dtype=float), y, args.step)
     print("\nFinal model (fit on all pairs)")
+    print("  (weight=0.00 means this signal contributes nothing to the BLENDED")
+    print("   score below -- it does NOT mean the signal failed to compute; see")
+    print("   its own raw values and single-signal AUC above.)")
     for s, w, lo, hi in zip(ALL_SIGNALS, model["w"], model["lo"], model["hi"]):
         print(f"  {s:<12} weight={w:.2f}   (raw range used for scaling: {lo:.3f} .. {hi:.3f})")
     print(f"  threshold = {model['t']:.3f}  (composite >= threshold -> flagged)")
 
+    # --- no-embedding fallback: a plain average of jaccard/winnow/structural,
+    # with its OWN LOPO-tuned threshold (see lopo_average above), for when
+    # embeddings are switched off (e.g. in the live-scan UI) or unavailable.
+    no_emb_avg = df[no_emb_signals].to_numpy(dtype=float).mean(axis=1)
+    no_emb_threshold = best_threshold(no_emb_avg, y)
+    print(f"\nNo-embedding fallback (plain average of {', '.join(no_emb_signals)})")
+    print(f"  threshold = {no_emb_threshold:.3f}")
+
+    # Non-default (original-label) runs get a distinct filename suffix so
+    # they can never land on top of -- or be mistaken for -- the real,
+    # family-labeled results that composite_model.json / .csv normally
+    # hold.
+    suffix = "" if args.labels == "family" else f"_{args.labels}_labels"
+
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "composite_model.json").write_text(json.dumps({
+    model_path = out_dir / f"composite_model{suffix}.json"
+    results_path = out_dir / f"composite_results{suffix}.csv"
+
+    model_path.write_text(json.dumps({
         "signals": ALL_SIGNALS,
         "lo": model["lo"].tolist(), "hi": model["hi"].tolist(),
         "weights": model["w"].tolist(), "threshold": model["t"],
         "labels": args.labels,
         "lopo_composite": metrics(y, preds_all, scores_all),
+        "no_embedding": {
+            "signals": no_emb_signals,
+            "threshold": no_emb_threshold,
+            "lopo_metrics": metrics(y, avg_pr, avg_sc),
+        },
     }, indent=2))
 
     final_scores = score(model, df[ALL_SIGNALS].to_numpy(dtype=float))
@@ -273,8 +377,12 @@ def main():
     out["label_used"] = y
     out["composite"] = np.round(final_scores, 4)
     out["flagged"] = (final_scores >= model["t"]).astype(int)
-    out.to_csv(out_dir / "composite_results.csv", index=False)
-    print(f"\nWrote {out_dir / 'composite_model.json'} and {out_dir / 'composite_results.csv'}")
+    out["verdict"] = out["flagged"].map({1: verdict_label(True), 0: verdict_label(False)})
+    out.to_csv(results_path, index=False)
+    print(f"\nWrote {model_path} and {results_path}")
+    if suffix:
+        print(f"(Non-default labels -- these filenames are suffixed so they can't "
+              f"overwrite the real family-labeled results.)")
 
     # --- error analysis (final model, so this is training-set behaviour)
     wrong = out[out["flagged"] != out["label_used"]].copy()

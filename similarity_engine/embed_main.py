@@ -7,8 +7,9 @@ the cosine similarity of each pair.
 
 Run from the repo root (same convention as main.py):
 
-    python similarity_engine/embed_main.py --backend tfidf      # quick test
-    python similarity_engine/embed_main.py --backend codebert   # the real thing
+    python similarity_engine/embed_main.py --backend tfidf           # quick test
+    python similarity_engine/embed_main.py --backend codebert        # text-only semantic
+    python similarity_engine/embed_main.py --backend graphcodebert   # + data-flow structure
     python similarity_engine/embed_main.py --backend codebert --source raw
 
 --source preprocessed  (default) embeds preprocessed_output/**/*.py, where
@@ -38,7 +39,7 @@ def source_path(dataset_path: str, source: str) -> Path:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--backend", choices=["codebert", "tfidf"], default="codebert")
+    parser.add_argument("--backend", choices=["codebert", "graphcodebert", "tfidf"], default="codebert")
     parser.add_argument("--source", choices=["preprocessed", "raw"], default="preprocessed")
     parser.add_argument("--pairs", default="pairs.csv")
     parser.add_argument("--out", default=None, help="default: results/embedding_<backend>[_raw].csv")

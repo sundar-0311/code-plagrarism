@@ -130,15 +130,27 @@ def main():
 
     print(f"Wrote {len(out_rows)} scored pairs to {args.output_csv}")
 
-    # Quick sanity check: how many labeled-plagiarized (1) pairs score
-    # LOW on jaccard but get rescued by structural similarity.
+    # Quick sanity check: how many pairs LABELED plagiarized by the raw
+    # 1-3/4-6 rule (see 2_build_pairs_csv.py) score LOW on Jaccard but
+    # get rescued by structural similarity.
+    #
+    # CAVEAT: is_plagiarized here is the RAW, uncorrected label -- it
+    # marks a pair "1" whenever either file is numbered 4-6, regardless
+    # of which specific original that file is actually a variant of
+    # (see variant_of.csv). So some of the "rescued" pairs below may be
+    # cross-family pairs that aren't real plagiarism at all; this list
+    # is a lead worth eyeballing, not a confirmed-plagiarism report.
+    # For corrected labels, cross-reference against variant_of.csv or
+    # run similarity_engine/composite.py (default --labels family).
     rescued = [
         r
         for r in out_rows
         if r["is_plagiarized"] == "1" and r["jaccard"] < 0.3 and r["structural"] >= 0.5
     ]
     if rescued:
-        print(f"\n{len(rescued)} plagiarized pairs had low Jaccard but high structural score:")
+        print(f"\n{len(rescued)} pairs labeled '1' by the raw rule had low Jaccard "
+              f"but high structural score (raw label, not family-corrected -- "
+              f"see caveat above):")
         for r in rescued[:10]:
             print(
                 f"  {Path(r['file_a']).name} vs {Path(r['file_b']).name} "

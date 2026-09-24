@@ -7,11 +7,20 @@ Two ways to use it (pick a mode in the sidebar):
 
   Live scan   Upload any set of .py files. The app preprocesses them,
               computes jaccard + winnowing + AST-structural similarity
-              for every pair, and (optionally) CodeBERT embeddings, then
-              blends whichever signals were computed using the weights
-              already tuned in results/composite_model.json (Day 2).
-              This is the "upload a folder, get flagged results" flow
-              from the plan.
+              for every pair, and (optionally) CodeBERT embeddings
+              (needs torch + transformers; downloads the model the
+              first time -- CodeBERT, not GraphCodeBERT: it measurably
+              outperforms GraphCodeBERT on this dataset, see
+              similarity_engine/composite.py's docstring), then blends
+              whichever signals were computed using the weights already
+              tuned in results/composite_model.json (Day 2). If
+              embeddings are switched off, it falls back to a plain
+              average of the other three signals, using the threshold
+              tuned specifically for that case -- see
+              composite.composite_score(), which both code paths below
+              now go through so the two modes can never disagree with
+              each other about how a pair is scored. This is the
+              "upload a folder, get flagged results" flow from the plan.
 
   Saved run   Loads the dataset's precomputed results/composite_results.csv
               and results/groups.csv (from 4_clustering_and_diff.py) so
@@ -46,7 +55,7 @@ sys.path.insert(0, str(SIM_ENGINE))
 from tokenizer import get_ngrams  # noqa: E402
 from token_similarity import jaccard_similarity  # noqa: E402
 from winnowing import fingerprint_similarity  # noqa: E402
-from composite import load_model, composite_score  # noqa: E402
+from composite import load_model, composite_score, verdict_label  # noqa: E402
 
 
 def _load_module(filename: str):
@@ -183,8 +192,8 @@ def live_scan_mode():
     uploads = st.file_uploader("Python files (.py) — select several at once", type=["py"],
                                 accept_multiple_files=True)
     use_embeddings = st.checkbox(
-        "Also compute CodeBERT embeddings (slower — needs torch + transformers, "
-        "downloads ~500MB the first time)", value=False,
+        "Also compute CodeBERT embeddings (slower — needs torch + "
+        "transformers, downloads ~500MB the first time)", value=False,
     )
     threshold_override = st.slider("Flagging threshold override (composite score)", 0.0, 1.0, -1.0, 0.01,
                                     help="Leave at -1 to use the trained model's own threshold.")
@@ -234,21 +243,21 @@ def live_scan_mode():
                 _TextAsPath(raw_sources[a]), _TextAsPath(raw_sources[b])
             ) or 0.0
 
+            # Always go through composite_score() -- with an "embedding"
+            # value it applies the fitted 4-signal weighted model; without
+            # one it falls back to composite.py's own plain average of
+            # jaccard/winnow/structural and that fallback's own
+            # separately-tuned threshold (model["no_embedding"]). Scoring
+            # this by hand here (as an earlier version of this file did,
+            # re-normalizing the 4-signal weights over 3 signals) gives a
+            # DIFFERENT number than composite.py's own no-embedding
+            # metrics were computed against -- routing both cases through
+            # the same function is what keeps "flagged" meaning the same
+            # thing everywhere in the project.
             signal_values = {"jaccard": jac, "winnow": win, "structural": struct}
             if embeddings is not None:
                 signal_values["embedding"] = float(embeddings[i, j])
-                sc, flagged = composite_score(model, signal_values)
-            else:
-                # Renormalize the trained weights over the signals we actually have.
-                available = ["jaccard", "winnow", "structural"]
-                idx = [model["signals"].index(s) for s in available]
-                w = model["w"][idx]
-                w = w / w.sum() if w.sum() > 0 else np.ones(len(idx)) / len(idx)
-                lo, hi = model["lo"][idx], model["hi"][idx]
-                x = np.array([signal_values[s] for s in available])
-                span = np.where(hi - lo == 0, 1.0, hi - lo)
-                sc = float(np.clip((x - lo) / span, 0, 1) @ w)
-                flagged = sc >= model["t"]
+            sc, flagged = composite_score(model, signal_values)
 
             score_matrix[i, j] = score_matrix[j, i] = sc
             pair_rows.append({
@@ -259,12 +268,18 @@ def live_scan_mode():
     np.fill_diagonal(score_matrix, 1.0)
     pairs_df = pd.DataFrame(pair_rows)
 
-    threshold = model["t"] if threshold_override < 0 else threshold_override
+    # The model's OWN default threshold depends on which mode we're in --
+    # the full model's threshold only makes sense for 4-signal scores, the
+    # no_embedding threshold only for the 3-signal average. Pick the one
+    # that actually matches what was just computed above.
+    default_threshold = model["t"] if embeddings is not None else model["no_embedding"]["threshold"]
+    threshold = default_threshold if threshold_override < 0 else threshold_override
     pairs_df["flagged"] = pairs_df["score"] >= threshold
+    pairs_df["verdict"] = pairs_df["flagged"].map({True: verdict_label(True), False: verdict_label(False)})
 
     st.caption(f"Using threshold = {threshold:.3f}"
-               + ("" if threshold_override < 0 else " (overridden — trained model uses "
-                                                      f"{model['t']:.3f})"))
+               + ("" if threshold_override < 0 else " (overridden — trained model default is "
+                                                      f"{default_threshold:.3f})"))
 
     tab_heat, tab_flags, tab_diff, tab_graph = st.tabs(
         ["Similarity heatmap", "Flagged pairs", "Diff viewer", "Cluster graph"]
@@ -273,8 +288,12 @@ def live_scan_mode():
         plot_heatmap(names, score_matrix, "Pairwise composite similarity")
     with tab_flags:
         flagged_df = pairs_df[pairs_df["flagged"]].copy()
-        st.write(f"**{len(flagged_df)} of {len(pairs_df)} pairs flagged**")
-        st.dataframe(pairs_df.sort_values("score", ascending=False), use_container_width=True, height=300)
+        st.write(f"**{len(flagged_df)} of {len(pairs_df)} pairs flagged** "
+                 f"({(pairs_df['verdict'] == verdict_label(True)).sum()} PLAGIARIZED, "
+                 f"{(pairs_df['verdict'] == verdict_label(False)).sum()} NOT PLAGIARIZED)")
+        display_cols = ["file_a", "file_b", "verdict", "score", "jaccard", "winnow", "structural", "embedding"]
+        st.dataframe(pairs_df.sort_values("score", ascending=False)[display_cols],
+                     use_container_width=True, height=300)
         groups = build_group_table(names, score_matrix, threshold)
         st.write("**Suspicion groups (connected components of flagged pairs)**")
         st.dataframe(groups, use_container_width=True) if len(groups) else st.info("No groups yet.")
@@ -321,7 +340,16 @@ def saved_run_mode():
         matrix[idx[r["file_b"]], idx[r["file_a"]]] = r["composite"]
 
     threshold = float(json_threshold())
-    pairs_df = sub.rename(columns={"composite": "score"})[["file_a", "file_b", "score", "flagged"]]
+    if "verdict" not in sub.columns:
+        # Stale results/composite_results.csv from an older composite.py
+        # that didn't write this column yet -- derive it from "flagged"
+        # instead of crashing. Re-run composite.py to get it for real.
+        sub = sub.copy()
+        sub["verdict"] = sub["flagged"].map({1: verdict_label(True), 0: verdict_label(False)})
+        st.warning("results/composite_results.csv has no 'verdict' column (it's from an older "
+                   "composite.py run) -- showing a verdict derived from 'flagged' instead. "
+                   "Re-run `python similarity_engine/composite.py` to regenerate it properly.")
+    pairs_df = sub.rename(columns={"composite": "score"})[["file_a", "file_b", "score", "flagged", "verdict"]]
 
     tab_heat, tab_flags, tab_diff, tab_graph = st.tabs(
         ["Similarity heatmap", "Flagged pairs", "Diff viewer", "Cluster graph"]
@@ -330,7 +358,9 @@ def saved_run_mode():
         plot_heatmap(files, matrix, f"{problem}: composite similarity")
     with tab_flags:
         flagged_df = pairs_df[pairs_df["flagged"] == 1]
-        st.write(f"**{len(flagged_df)} of {len(pairs_df)} pairs flagged** in {problem}")
+        st.write(f"**{len(flagged_df)} of {len(pairs_df)} pairs flagged** in {problem} "
+                 f"({(pairs_df['verdict'] == verdict_label(True)).sum()} PLAGIARIZED, "
+                 f"{(pairs_df['verdict'] == verdict_label(False)).sum()} NOT PLAGIARIZED)")
         st.dataframe(pairs_df.sort_values("score", ascending=False), use_container_width=True, height=300)
         groups_path = ROOT / "results" / "groups.csv"
         if groups_path.exists():

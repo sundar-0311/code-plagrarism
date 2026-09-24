@@ -7,6 +7,26 @@ Labeling rule (based on the 1-3 / 4-6 convention):
 If your files don't start with a leading number, pass --pattern to
 control how the "plagiarized" group is detected (see NUMBER_RE below).
 
+*** KNOWN LIMITATION -- READ BEFORE USING is_plagiarized AS GROUND TRUTH ***
+This rule is a coarse heuristic, not the real ground truth. It assumes
+EVERY file numbered 1-3 is an equally valid "original" for EVERY file
+numbered 4-6 within a problem. In reality each 4-6 file is a variant of
+exactly ONE specific original (e.g. file 4 might be a renamed copy of
+file 1 only) -- so a pair like "file 2 vs file 4" gets written here as
+plagiarized (1) even when file 2 and file 4 are genuinely unrelated,
+independently-written solutions.
+The real lineage is recorded separately in variant_of.csv (problem_id,
+file_num, family). similarity_engine/composite.py reads that file and
+derives corrected "family" labels (a pair is plagiarized only if both
+files share a family) -- see the NOTE ON LABELS in composite.py's own
+docstring, and its --labels flag (default: family).
+Practical effect: is_plagiarized in this file, and in every CSV
+downstream of it (pairs_scored.csv, results/similarity_results.csv,
+results/embedding_*.csv) that carries this column forward unchanged,
+is the RAW/uncorrected label. Nothing that gets reported as this
+project's actual performance should be computed from that column
+directly -- go through composite.py's family labels instead.
+
 Usage:
     python build_pairs_csv.py <dataset_dir> <output.csv>
     python build_pairs_csv.py <dataset_dir> <output.csv> --plag-start 4
@@ -110,6 +130,13 @@ def main():
     print(f"  plagiarized (1): {n_pos}")
     print(f"  non-plagiarized (0): {n_neg}")
     print(f"  problems covered: {len(problems)}")
+    print(f"\n  NOTE: these are RAW labels from the 1-{args.plag_start - 1} / "
+          f"{args.plag_start}+ numbering rule, which assumes any low-numbered "
+          f"file is a valid 'original' for any high-numbered file in the same "
+          f"problem. That's known to mislabel unrelated cross-family pairs as "
+          f"plagiarized. For corrected labels and anything worth reporting, "
+          f"run similarity_engine/composite.py (default --labels family, "
+          f"backed by variant_of.csv) rather than citing this column directly.")
 
     if unresolved:
         print(f"\nWARNING: {len(unresolved)} pairs could not be labeled "

@@ -31,5 +31,20 @@
     "f1": 0.8043478260869565,
     "accuracy": 0.85,
     "auc": 0.9333133971291867
+  },
+  "no_embedding": {
+    "signals": [
+      "jaccard",
+      "winnow",
+      "structural"
+    ],
+    "threshold": 0.38835,
+    "lopo_metrics": {
+      "precision": 0.7291666666666666,
+      "recall": 0.7954545454545454,
+      "f1": 0.7608695652173914,
+      "accuracy": 0.8166666666666667,
+      "auc": 0.8926435406698564
+    }
   }
 }
